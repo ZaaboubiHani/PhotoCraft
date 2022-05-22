@@ -35,11 +35,9 @@ namespace PhotoCraft.ViewModels
                     StrokeColor.R,
                     StrokeColor.G,
                     StrokeColor.B),
-
                     Width = value,
                     Height = value,
                     StylusTip = StylusTip.Rectangle,
-                    //FitToCurve = true,
                     IsHighlighter = false,
                     IgnorePressure = true,
 
@@ -68,7 +66,6 @@ namespace PhotoCraft.ViewModels
                     Width = StrokeThickness,
                     Height = StrokeThickness,
                     StylusTip = StylusTip.Rectangle,
-                    //FitToCurve = true,
                     IsHighlighter = false,
                     IgnorePressure = true,
 
@@ -234,7 +231,6 @@ namespace PhotoCraft.ViewModels
                 Width = StrokeThickness,
                 Height =StrokeThickness,
                 StylusTip = StylusTip.Rectangle,
-                //FitToCurve = true,
                 IsHighlighter = false,
                 IgnorePressure = true,
 

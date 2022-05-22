@@ -102,6 +102,8 @@ namespace PhotoCraft.Functions
             cropperView.Cancel = false;
             cropperView.Progress = 0;
             Process.Start(cropper.SaveLocation);
+
+            await ResetCropperInputs(cropperView);
         }
 
         public async Task ResetCropperInputs(CropperViewModel cropperViewModel)

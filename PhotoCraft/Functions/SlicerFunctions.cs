@@ -66,6 +66,7 @@ namespace PhotoCraft.Functions
             slicerView.Cancel = false;
             slicerView.Progress = 0;
             Process.Start(slicer.SaveLocation);
+            await ResetSlicerInputs(slicerView);
         }
 
         public async Task SliceVertical(SlicerModel slicer, SlicerViewModel slicerView)
@@ -113,6 +114,8 @@ namespace PhotoCraft.Functions
             slicerView.Cancel = false;
             slicerView.Progress = 0;
             Process.Start(slicer.SaveLocation);
+            await ResetSlicerInputs(slicerView);
+
         }
 
         public async Task ResetSlicerInputs(SlicerViewModel slicerViewModel)
