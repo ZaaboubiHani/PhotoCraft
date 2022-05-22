@@ -1,0 +1,145 @@
+﻿<UserControl x:Class="PhotoCraft.Views.CropperView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:PhotoCraft.Views" 
+             xmlns:vm="clr-namespace:PhotoCraft.ViewModels"
+             mc:Ignorable="d" 
+             d:DesignHeight="450" d:DesignWidth="800">
+    
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <Button BorderThickness="0" Content="Browse" HorizontalContentAlignment="Center" 
+                Margin="10,10,0,0" Foreground="{DynamicResource ForeGround}" FontSize="24"
+                HorizontalAlignment="Left"
+                VerticalAlignment="Top"
+                Command="{Binding BrowseCommand}"
+                Height="50"
+                Width="150"
+                FontWeight="Bold" Background="{DynamicResource ElementColor}">
+            <Button.Resources>
+                <Style TargetType="{x:Type Border}">
+                    <Setter Property="CornerRadius" Value="30"/>
+                </Style>
+            </Button.Resources>
+        </Button>
+
+        <TextBlock Text="{Binding DisplayedImagePath}" 
+                   Foreground="{DynamicResource ForeGround}"
+                   FontSize="24"
+                   Margin="180,15,0,0"
+                   Width="800"
+                   Height="40"
+                   HorizontalAlignment="Left"
+                   VerticalAlignment="Top"
+                   />
+        
+
+        <Button BorderThickness="0" Content="Save" HorizontalContentAlignment="Center" 
+                Margin="10,80,0,0" Foreground="{DynamicResource ForeGround}" FontSize="24"
+                HorizontalAlignment="Left"
+                VerticalAlignment="Top"
+                Height="50"
+                Width="150"
+                Command="{Binding SaveLocationCommand}"
+                FontWeight="Bold" Background="{DynamicResource ElementColor}">
+            <Button.Resources>
+                <Style TargetType="{x:Type Border}">
+                    <Setter Property="CornerRadius" Value="30"/>
+                </Style>
+            </Button.Resources>
+        </Button>
+        <TextBlock Text="{Binding SaveLocation}" 
+                   Foreground="{DynamicResource ForeGround}"
+                   FontSize="24"
+                   Margin="180,85,0,0"
+                   Width="800"
+                   Height="40"
+                   HorizontalAlignment="Left"
+                   VerticalAlignment="Top"
+                   />
+
+        <Button BorderThickness="0" Content="Start" HorizontalContentAlignment="Center" 
+                Margin="10,10" Foreground="{DynamicResource TextColor}" FontSize="24"
+                HorizontalAlignment="Right"
+                VerticalAlignment="Top"
+                Height="50"
+                Width="150"
+                Command="{Binding StartProcessCommand}"
+                IsEnabled="{Binding IsEnabled}"
+                FontWeight="Bold" Background="{DynamicResource SnackColor}">
+            <Button.Resources>
+                <Style TargetType="{x:Type Border}">
+                    <Setter Property="CornerRadius" Value="30"/>
+                </Style>
+            </Button.Resources>
+        </Button>
+
+        <ComboBox BorderThickness="0" HorizontalContentAlignment="Center" 
+                Margin="0,80,10,0" Foreground="{DynamicResource TextColor}" FontSize="24"
+                HorizontalAlignment="Right"
+                VerticalAlignment="Top"
+                Height="50"
+                Width="150"
+                ItemsSource="{Binding SafePaths}"
+                FontWeight="Bold" Background="{DynamicResource SnackColor}"
+                SelectedIndex="{Binding SelectedIndex}"
+                SelectedItem="{Binding SelectedBoxItem}"
+                  >
+            
+        </ComboBox>
+
+
+        <Grid Grid.Row="1" Margin="20"
+              HorizontalAlignment="Left"
+                VerticalAlignment="Top"
+                Width="900"
+                Height="500">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+            <Border 
+                Grid.Column="0"
+                Background="{DynamicResource ElementColor}"
+                CornerRadius="20"
+                Margin="10"
+                
+                >
+                <Grid Background="Transparent">
+                    
+                <Image 
+                    x:Name="PictureBox"
+                    Source="{Binding DisplayedImage}"/>
+                    <InkCanvas Background="Transparent" Name="inkCanvasMeasure" 
+                               EditingMode="None"
+                               Strokes="{Binding InkStrokes, Mode=TwoWay}" 
+                               HorizontalAlignment="Center"
+                               MouseDown="inkCanvasMeasure_MouseDown"
+                               MouseMove="inkCanvasMeasure_MouseMove"
+                               MouseUp="inkCanvasMeasure_MouseUp"
+                               Width="{Binding ElementName=PictureBox, Path=ActualWidth}"
+                               Height="{Binding ElementName=PictureBox, Path=ActualHeight}"
+                               DefaultDrawingAttributes="{Binding drawingAttributes}"
+                               />
+                </Grid>
+            </Border>
+            <Border 
+                Grid.Column="1"
+                Background="{DynamicResource ElementColor}"
+                CornerRadius="20"
+                Margin="10"
+                >
+                <Image 
+                    x:Name="PreviewBox"
+                    Source="{Binding PreviewedImage}"/>
+            </Border>
+        </Grid>
+        
+              
+    </Grid>
+</UserControl>

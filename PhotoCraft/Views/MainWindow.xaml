@@ -1,0 +1,195 @@
+﻿<Window x:Class="PhotoCraft.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:PhotoCraft" 
+        xmlns:local1="clr-namespace:PhotoCraft.ViewModels" 
+        xmlns:local2="clr-namespace:PhotoCraft.Views"
+        mc:Ignorable="d"
+        ResizeMode="NoResize"
+        
+        Width="1280"
+        Height="720"
+        WindowStyle="None"
+        Background="{DynamicResource PanelColor}"
+        Title="MainWindow" 
+        MaxHeight="{x:Static SystemParameters.MaximizedPrimaryScreenHeight}" WindowStartupLocation="CenterScreen"
+        >
+    <Window.Resources>
+        <local1:SlicerViewModel x:Key="SLICE"/>
+        <local1:CropperViewModel x:Key="CROP"/>
+    </Window.Resources>
+    
+
+    <Border CornerRadius="10">
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="auto"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="auto" />
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+
+            <Rectangle Grid.Column="0" Fill="{DynamicResource ElementColor}"/>
+            <Rectangle Grid.Column="1" Fill="{DynamicResource ElementColor}"/>
+
+
+            <StackPanel 
+                        Margin="15" 
+                        Grid.Column="1" 
+                        Grid.Row="1" 
+                          VerticalAlignment="Stretch"
+                          HorizontalAlignment="Stretch"
+                        Height="{Binding SlicerHeight}">
+                <local2:SlicerView DataContext="{Binding Source={StaticResource ResourceKey=SLICE}}"/>
+
+            </StackPanel>
+            <StackPanel 
+                        Margin="15" 
+                        Grid.Column="1" 
+                        Grid.Row="1" 
+                          VerticalAlignment="Stretch"
+                          HorizontalAlignment="Stretch"
+                        Height="{Binding HomeHeight}">
+                <local2:HomeView/>
+
+            </StackPanel>
+            <StackPanel 
+                        Margin="15" 
+                        Grid.Column="1" 
+                        Grid.Row="1" 
+                          VerticalAlignment="Stretch"
+                          HorizontalAlignment="Stretch"
+                        Height="{Binding CropperHeight}">
+                <local2:CropperView x:Name="Cropper" DataContext="{Binding Source={StaticResource ResourceKey=CROP}}" Loaded="CropperView_Loaded"/>
+
+            </StackPanel>
+
+            <Menu  Foreground="{DynamicResource ForeGround}" FontWeight="Bold" Grid.Column="1" FontSize="20" VerticalAlignment="Center" Margin="20,0,0,0" Background="{DynamicResource ElementColor}">
+                <MenuItem Header="File" Padding="30,5" Background="{DynamicResource ElementColor}">
+
+                    <MenuItem Header="Open" Background="{DynamicResource ElementColor}"/>
+                    <MenuItem Header="Save" Background="{DynamicResource ElementColor}"/>
+                    <MenuItem Header="Reset" Background="{DynamicResource ElementColor}"/>
+                    <Separator/>
+                    <MenuItem Header="Exit" Click="Exit_Click" Background="{DynamicResource ElementColor}"/>
+                </MenuItem>
+                <MenuItem Header="View" Padding="30,5">
+                    <MenuItem Header="Theme" Background="{DynamicResource ElementColor}"
+                              Command="{Binding OpenThemeWindowCommand}"/>
+                    <MenuItem Header="Preview" Background="{DynamicResource ElementColor}"
+                              Click="MenuItem_Click"/>
+                </MenuItem>
+                <MenuItem Header="Tools" Padding="30,5">
+                    <MenuItem Header="Slicer" Background="{DynamicResource ElementColor}"
+                              Command="{Binding UpdateViewCommand}" CommandParameter="Slicer"/>
+                    <MenuItem Header="Cropper" Background="{DynamicResource ElementColor}"
+                              Command="{Binding UpdateViewCommand}" CommandParameter="Cropper"/>
+                </MenuItem>
+                <MenuItem Header="Options" Padding="30,5">
+                    <MenuItem Header="Settings" Background="{DynamicResource ElementColor}"/>
+                    <MenuItem Header="After Tasks" Background="{DynamicResource ElementColor}"/>
+                </MenuItem>
+                <MenuItem Header="Help" Padding="30,5">
+                    <MenuItem Header="Contact" Background="{DynamicResource ElementColor}"
+                              Click="MenuItem_Click_1"/>
+                    <MenuItem Header="About" Background="{DynamicResource ElementColor}"
+                              Click="MenuItem_Click_2"/>
+                    <MenuItem Header="Tutorial" Background="{DynamicResource ElementColor}"
+                              Command="{Binding OpenTutorialWindowCommand}"/>
+                </MenuItem>
+            </Menu>
+
+
+            <Button Grid.Column="1" BorderThickness="0" 
+                    Background="Transparent"
+                    Width="30"
+                    Height="30"
+                    HorizontalAlignment="Right"
+                    Margin="30,0"
+                    Click="Exit_Click"
+                    
+                    >
+                <Path  Fill="{DynamicResource ForeGround}" Data = "M20.125 2.81375L18.1863 0.875L10.5 8.56125L2.81375 0.875L0.875 2.81375L8.56125 10.5L0.875 18.1863L2.81375 20.125L10.5 12.4387L18.1863 20.125L20.125 18.1863L12.4387 10.5L20.125 2.81375Z" Stretch="UniformToFill"/>
+            </Button>
+
+            <Button Grid.Column="1" BorderThickness="0" 
+                    Background="Transparent"
+                    Width="30"
+                    Height="30"
+                    HorizontalAlignment="Right"
+                    Margin="100,0"
+                    Click="Minimize_Click"
+                    >
+                <Line Y1="1.5" X2="235" Y2="1.5" Fill="{DynamicResource ForeGround}" Stroke="{DynamicResource ForeGround}" StrokeThickness="6"/>
+            </Button>
+ 
+
+
+
+            <StackPanel Grid.Row="1" >
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="auto"/>
+                        <RowDefinition Height="auto" />
+                        <RowDefinition Height="auto" />
+                        <RowDefinition Height="auto" />
+                        <RowDefinition Height="auto"/>
+                        <RowDefinition Height="auto"/>
+
+                    </Grid.RowDefinitions>
+
+                    <Button BorderThickness="0" Content="Slicer" HorizontalContentAlignment="Center" 
+                            Padding="50,20" Margin="40,20,40,0" Foreground="{DynamicResource TextColor}" FontSize="36"
+                            FontFamily="Open Sans" FontWeight="Bold" Background="{DynamicResource SnackColor}" 
+                                  Command="{Binding UpdateViewCommand}" CommandParameter="Slicer">
+                        <Button.Resources>
+                            <Style TargetType="{x:Type Border}">
+                                <Setter Property="CornerRadius" Value="42"/>
+                            </Style>
+                        </Button.Resources>
+                    </Button>
+
+                    <StackPanel Grid.Row="1" Height="{Binding SlicerHeight}">
+                        <local2:SlicerControlsView x:Name="Slicer"  DataContext="{Binding Source={StaticResource ResourceKey=SLICE}}"/>
+                    </StackPanel>
+
+                    <Button BorderThickness="0" Grid.Row="2" 
+                            Content="Cropper" 
+                            Command="{Binding UpdateViewCommand}" CommandParameter="Cropper"
+                            HorizontalContentAlignment="Center" Padding="50,20" 
+                            Margin="40,20,40,0" Foreground="{DynamicResource TextColor}" FontSize="36" FontFamily="Open Sans" FontWeight="Bold" Background="{DynamicResource SnackColor}" >
+                        <Button.Resources>
+                            <Style TargetType="{x:Type Border}">
+                                <Setter Property="CornerRadius" Value="42"/>
+                            </Style>
+                        </Button.Resources>
+                    </Button>
+                    <StackPanel Grid.Row="3" 
+                                Height="{Binding CropperHeight}">
+                                <local2:CropperControlView  DataContext="{Binding Source={StaticResource ResourceKey=CROP}}"/>
+
+                    </StackPanel>
+
+                    <Separator Background="{DynamicResource ElementColor}" Grid.Row="4" Margin="0,25" Width="200">
+                        <Separator.RenderTransform>
+                            <ScaleTransform ScaleY="3" />
+                        </Separator.RenderTransform>
+                    </Separator>
+
+                    <Button Grid.Row="5" BorderThickness="0" Background="Transparent" Height="auto"
+                                  Width="110" Command="{Binding UpdateViewCommand}" CommandParameter="Home">
+                        <Path  Fill="{DynamicResource SnackColor}" Data="M37.25 79.5V51.75H55.75V79.5H78.875V42.5H92.75L46.5 0.875L0.25 42.5H14.125V79.5H37.25Z" Height="92" Stretch="Fill" Width="108" />
+                    </Button>
+
+                </Grid>
+            </StackPanel>
+
+        </Grid>
+
+
+    </Border>
+</Window>

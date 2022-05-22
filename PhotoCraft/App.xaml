@@ -1,0 +1,32 @@
+﻿<Application x:Class="PhotoCraft.App"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:local="clr-namespace:PhotoCraft"
+             xmlns:views="clr-namespace:PhotoCraft.Views"
+             xmlns:viewmodels="clr-namespace:PhotoCraft.ViewModels"
+             StartupUri="Views/MainWindow.xaml">
+    <Application.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="Themes/Light.xaml"/>
+                <ResourceDictionary Source="Themes/Default.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
+            <DataTemplate DataType="{x:Type viewmodels:HomeViewModel}">
+                <views:HomeView/>
+            </DataTemplate>
+            <DataTemplate DataType="{x:Type viewmodels:SlicerViewModel}">
+
+                <views:SlicerView/>
+            </DataTemplate>
+            <DataTemplate DataType="{x:Type viewmodels:SlicerControlViewModel}">
+                <views:SlicerControlsView/>
+            </DataTemplate>
+            <DataTemplate DataType="{x:Type viewmodels:CropperViewModel}">
+                <views:CropperView/>
+            </DataTemplate>
+            <DataTemplate DataType="{x:Type viewmodels:CropperControlViewModel}">
+                <views:CropperControlView/>
+            </DataTemplate>
+        </ResourceDictionary>
+    </Application.Resources>
+</Application>
